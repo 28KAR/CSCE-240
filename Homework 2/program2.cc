@@ -1,5 +1,6 @@
-// Copyright 2025 bhipp
-// Introduction to functions
+//  -------------------------------------  //
+//  Copyright Katherine Asher Rogers 2025  //
+//  -------------------------------------  //
 #include<iostream>
 using std::cout;
 using std::cin;
