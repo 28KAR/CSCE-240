@@ -15,33 +15,32 @@ int main() {
     bool error = false;
     do {
         cin >> quit;
-        if ((error == false)&&((quit == '0')||(quit == '1')||(quit == '2')||(quit == '3')||(quit == '4')||(quit == '5')||(quit == '6')||(quit == '7')||(quit == '8')||(quit == '9'))) {
+        if ((error == false)&&(quit != 'q')) {
             timesRead++;
-            timeMinutes += (quit);
+            cin >> timeMinutes;
             cin.ignore(1, ':');
             cin >> timeSeconds;
-        }
-        if ((timeMinutes > 59)||(timeSeconds > 59)||(timeMinutes < 0)||(timeSeconds < 0))
-            error = true;
-        else {
-            if (((fastMinutes == 0)&&(fastSeconds == 0)) || (((timeMinutes * 10) + timeSeconds) < ((fastMinutes * 10) + fastSeconds))) {
+            if ((timeMinutes > 59)||(timeSeconds > 59)||(timeMinutes < 0)||(timeSeconds < 0))
+                error = true;
+        } else {
+            if (((fastMinutes == 0)&&(fastSeconds == 0)) || ((timeMinutes * 10) + timeSeconds) < ((fastMinutes * 10) + fastSeconds)) {
                 fastMinutes = timeMinutes;
                 fastSeconds = timeSeconds;
             }
             totalSeconds += timeSeconds;
-            if (totalSeconds > 59) {
+            if (totalSeconds >= 60) {
                 totalSeconds -= 60;
                 totalMinutes++;
             }
             totalMinutes += timeMinutes;
-            if (totalMinutes > 59) {
+            if (totalMinutes >= 60) {
                 totalMinutes -= 60;
                 totalHours++;
             }
         }
         timeMinutes = 0;
         timeSeconds = 0;
-    } while (!(quit == 'q'));
+    } while (quit != 'q');
 
     if (error) {
         cout << "Input " << timesRead << " did not match expected format." << endl;
