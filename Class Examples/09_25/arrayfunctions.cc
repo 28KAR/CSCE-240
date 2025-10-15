@@ -1,0 +1,53 @@
+// Copyright 2025 bhipp
+// Implementations of the functions promised in arrayfunctions.h
+#include"arrayfunctions.h"
+#include<iostream>
+using std::cout;
+using std::endl;
+#include<iomanip>
+#include<cstdlib>
+
+int BinarySearch(const int values[], int size, int lookin4) {
+  int bottom = 0, top = size - 1;
+  int middle = (bottom + top) / 2;
+  while ( values[middle] != lookin4 && bottom < top ) {
+    if ( values[middle] > lookin4 ) {
+      top = middle - 1;
+    } else {
+      bottom = middle + 1;
+    }
+    middle = (bottom + top) / 2;
+  }
+  if ( values[middle] == lookin4 )
+    return middle;
+  return -1;
+}
+
+
+void InsertionSort(int values[], int size) {
+  for ( int sorted = 1; sorted < size; ++sorted ) {
+    int i = sorted;
+    while ( i > 0 && values[i] < values[i - 1] ) {
+      int temp = values[i];
+      values[i] = values[i - 1];
+      values[i - 1] = temp;
+      --i;
+    }
+  }
+}
+
+void Populate(int values[], int size, int low, int high) {
+  if ( low > high ) {
+    int temp = low;
+    low = high;
+    high = temp;
+  }
+  for ( int i = 0; i < size; ++i )
+    values[i] = low + rand() % (high - low + 1);
+}
+
+void PrintArray(const int values[], int size, int width) {
+  for ( int i = 0; i < size; ++i )
+    cout << std::setw(width) << values[i];
+  cout << endl;
+}
