@@ -8,6 +8,6 @@ void RemoveValues(int x[], int size, int y);
 
 void ShiftArray(int x[], int size, int y);
 
-bool isAnagram(char x[], char y[], bool case_sensitive);
+bool isAnagram(char x[], char y[], bool case_sensitive = false);
 
 #endif
