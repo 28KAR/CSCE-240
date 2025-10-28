@@ -236,9 +236,3 @@ bool Replace1With2(char x[], int size, char a, char b, char c) {
     return true;
 
 }
-
-void SwapRowsAndColumns(int x[][]) {
-
-    
-
-}

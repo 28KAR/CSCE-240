@@ -14,6 +14,4 @@ bool IsAnagram(const char x[], const char y[], bool case_sensitive = false);
 
 bool Replace1With2(char x[], int size, char a, char b, char c);
 
-void SwapRowsAndColumns(int);
-
 #endif
