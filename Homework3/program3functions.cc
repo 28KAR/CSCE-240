@@ -237,8 +237,8 @@ bool Replace1With2(char x[], int size, char a, char b, char c) {
 
 }
 
-void SwapRowsAndColumns(int x[][]) {
+void SwapRowsAndColumns(int x[]) {
 
-    
+    return;
 
 }
