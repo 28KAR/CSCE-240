@@ -119,4 +119,10 @@ public:
 
     }
 
+    friend ostream& operator<<(ostream&, Height& h)
+    {
+        cout << h.value << " " << h.units;
+        return cout;
+    }
+
 };
