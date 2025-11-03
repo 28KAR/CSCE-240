@@ -6,123 +6,126 @@
 #include <string>
 using std::cout;
 using std::endl;
-using namespace std;
+using std::string;
+using std::ostream;
 
-class Height {
-private:
-    double value;
-    string units;
+bool Height::SetValue(double a) {       //  Setter for value
 
-public:
+    if (a < 0)
+        return false;
+    value = a;
+    return true;
 
-    bool SetValue(double a) {
+}
 
-        if (a < 0)
-            return false;
-        value = a;
-        return true;
+double Height::GetValue() const {       //  Accessor for value
 
-    }
-    double GetValue() {
+    return value;
 
-        return value;
+}
 
-    }
+bool Height::SetUnits(string a) {       //  Setter for units
 
-    bool SetUnits(string a) {
+    if ((a != "inches") && (a != "feet") && (a != "centimeters") && (a != "meters"))
+        return false;
+    units = a;
+    return true;
 
-        if ((a != "inches") && (a != "feet") && (a != "centimeters") && (a != "meters"))
-            return false;
+}
+
+string Height::GetUnits() const {       //  Accessor for units
+
+    return units;
+
+}
+
+double Height::GetMeterValue() const {      //  Returns value converted to meters for easy comparison
+
+    if (units == "inches")
+        return (double)(value * 0.0254);
+    if (units == "feet")
+        return (double)(value * 0.3048);
+    if (units == "centimeters")
+        return (double)(value / 100);
+    return (double)value;
+
+}
+
+void Height::ConvertUnits(string a) {       //  Checks value type and converts it to listed type
+
+    if (a == units)
+    return;
+
+    if (units == "inches") {
+
+        if (a == "feet")
+            value /= 12;
+        if (a == "centimeters")
+            value *= 2.54;
+        if (a == "meters")
+            value *= 0.0254;
         units = a;
-        return true;
-
-    }
-    string GetUnits() {
-
-        return units;
-
-    }
-    void ConvertUnits(string a) {
-
-        if (a == units)
         return;
 
-        if (units == "inches") {
+    }
+    if (units == "feet") {
 
-            if (a == "feet")
-                value /= 12;
-            if (a == "centimeters")
-                value *= 2.54;
-            if (a == "meters")
-                value *= 0.0254;
-            units = a;
-            return;
+        if (a == "inches")
+            value *= 12;
+        if (a == "centimeters")
+            value *= 30.48;
+        if (a == "meters")
+            value *= 0.3048;
+        units = a;
+        return;
 
-        }
-        if (units == "feet") {
+    }
+    if (units == "centimeters") {
 
-            if (a == "inches")
-                value *= 12;
-            if (a == "centimeters")
-                value *= 30.48;
-            if (a == "meters")
-                value *= 0.3048;
-            units = a;
-            return;
+        if (a == "inches")
+            value /= 2.54;
+        if (a == "feet")
+            value /= 30.48;
+        if (a == "meters")
+            value /= 100;
+        units = a;
+        return;
 
-        }
-        if (units == "centimeters") {
+    }
+    if (units == "meters") {
 
-            if (a == "inches")
-                value /= 2.54;
-            if (a == "feet")
-                value /= 30.48;
-            if (a == "meters")
-                value /= 100;
-            units = a;
-            return;
-
-        }
-        if (units == "meters") {
-
-            if (a == "inches")
-                value /= 0.0254;
-            if (a == "feet")
-                value /= 0.3048;
-            if (a == "centimeters")
-                value *= 100;
-            units = a;
-            return;
-
-        }
-
+        if (a == "inches")
+            value /= 0.0254;
+        if (a == "feet")
+            value /= 0.3048;
+        if (a == "centimeters")
+            value *= 100;
+        units = a;
         return;
 
     }
 
-    Height() {
+    return;
 
+}
+
+Height::Height(double a, string b) {        //  Constructor
+
+    if (a < 0)
         value = 0;
+    else
+        value = a;
+    if ((b != "inches") && (b != "feet") && (b != "centimeters") && (b != "meters"))
         units = "feet";
+    else
+        units = b;
 
-    }
-    Height(double a, string b) {
+}
 
-        if (a < 0)
-            value = 0;
-        else
-            value = a;
-        if ((b != "inches") && (b != "feet") && (b != "centimeters") && (b != "meters"))
-            units = "feet";
-        else
-            units = b;
+ostream& operator << (ostream& where, const Height& h)      //  Overloads for printing Height
+{
 
-    }
+    where << h.GetValue() << " " << h.GetUnits();
+    return where;
 
-    friend ostream& operator<<(ostream&, Height& h)
-    {
-        cout << h.value << " " << h.units;
-        return cout;
-    }
-
-};
+}

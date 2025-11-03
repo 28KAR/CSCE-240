@@ -15,6 +15,10 @@ int main() {
     cout << "Failed Width test 1" << endl;
 
   HeightRange range2(Height(6, "inches"), Height(1, "pounds"));
+
+  cout << range2.Width().GetValue() << " =? 0.5: " << (range2.Width().GetValue() == 0.5) << endl; 
+  cout << range2.Width().GetUnits() << " =? feet: " << (range2.Width().GetUnits() == "feet") << endl; 
+
   if ( range2.Width().GetValue() == 0.5 &&
        range2.Width().GetUnits() == "feet" )
     cout << "Passed Width test 2" << endl;
@@ -22,6 +26,10 @@ int main() {
     cout << "Failed Width test 2" << endl;
 
   HeightRange range3(Height(1, "meters"), Height(162, "centimeters"));
+
+  cout << range3.Width().GetValue() << " =? 62: " << (range2.Width().GetValue() == 0.5) << endl; 
+  cout << range3.Width().GetUnits() << " =? centimeters: " << (range2.Width().GetUnits() == "feet") << endl; 
+
   if ( range3.Width().GetValue() == 62 &&
        range3.Width().GetUnits() == "centimeters" )
     cout << "Passed Width test 3" << endl;
