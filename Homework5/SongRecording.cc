@@ -19,12 +19,12 @@ SongRecording::SongRecording(string title, string primaryArtist, int trackLength
 
 }
     
-SongRecording::SongRecording(SongRecording &obj) {
+SongRecording::SongRecording(SongRecording& obj) {
 
-    this->songTitle = obj.songTitle;
-    this->artistNames = obj.artistNames;
-    this->trackLength = obj.trackLength;
-    this->artistNumber = obj.artistNumber;
+    SetTitle(obj.GetTitle());
+    SetArtist(obj.GetArtist());
+    SetTrackLength(obj.GetTrackLength());
+    SetNumArtists(obj.GetNumArtists());
     
 }
     
@@ -79,7 +79,7 @@ string SongRecording::GetArtist(int num) {
 
     if ((num > 0) && (num <= this->artistNumber))
         return artistNames[num];
-    else return
+    return "out of bounds";
 
 }
 

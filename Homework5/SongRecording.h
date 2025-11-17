@@ -21,14 +21,14 @@ namespace csce240_programming_assignment_5 {
 
         SongRecording(std::string title = "untitled", std::string primaryArtist = "unknown", int trackLength = 0, int numberOfArtists = 1);
         explicit SongRecording(SongRecording& obj);
-        SongRecording& operator = (const SongRecording &songRecord);
+        SongRecording& operator = (const SongRecording& songRecord);
         ~SongRecording();
         std::string GetTitle();
         int GetNumArtists();
         void SetNumArtists(int);
         void SetTitle(std::string title);
         void SetArtist(std::string artist, int num = 1);
-        std::string GetArtist(int num);
+        std::string GetArtist(int num = 1);
         int GetTrackLength();
         void SetTrackLength(int);
 
