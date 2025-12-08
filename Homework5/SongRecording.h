@@ -6,7 +6,6 @@
 
 #include <string>
 #include <iostream>
-using std::ostream;
 
 namespace csce240_programming_assignment_5 {
     class SongRecording{
@@ -19,18 +18,29 @@ namespace csce240_programming_assignment_5 {
 
     public:
 
-        SongRecording(std::string title = "untitled", std::string primaryArtist = "unknown", int trackLength = 0, int numberOfArtists = 1);
-        explicit SongRecording(SongRecording& obj);
+        SongRecording(std::string title = "untitled", std::string primaryArtist = "unknown", int numberOfArtists = 0, int trackLength = 1);
+
+        explicit SongRecording(const SongRecording& obj);
+        
         SongRecording& operator = (const SongRecording& songRecord);
+        
         ~SongRecording();
+        
         std::string GetTitle();
-        int GetNumArtists();
-        void SetNumArtists(int);
-        void SetTitle(std::string title);
-        void SetArtist(std::string artist, int num = 1);
+
         std::string GetArtist(int num = 1);
+        
+        int GetNumArtists();
+        
         int GetTrackLength();
-        void SetTrackLength(int);
+        
+        void SetNumArtists(int num);
+        
+        void SetTitle(const std::string& title);
+        
+        void SetArtist(const std::string& artist, int num = 1);
+        
+        void SetTrackLength(int num);
 
     };
 };

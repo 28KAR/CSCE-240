@@ -4,27 +4,21 @@
 #include"SongRecording.h"
 #include<iostream>
 #include <string>
-using std::cout;
-using std::endl;
 using std::string;
-using std::ostream;
 using csce240_programming_assignment_5::SongRecording;
 
-SongRecording::SongRecording(string title, string primaryArtist, int trackLength, int numberOfArtists) {
+SongRecording::SongRecording(string title, string primaryArtist, int numberOfArtists, int trackLength) {
 
     SetTitle(title);
     SetArtist(primaryArtist);
-    SetTrackLength(trackLength);
     SetNumArtists(numberOfArtists);
+    SetTrackLength(trackLength);
 
 }
-    
-SongRecording::SongRecording(SongRecording& obj) {
 
-    SetTitle(obj.GetTitle());
-    SetArtist(obj.GetArtist());
-    SetTrackLength(obj.GetTrackLength());
-    SetNumArtists(obj.GetNumArtists());
+SongRecording::SongRecording(const SongRecording& obj) {
+
+    *this = obj;
     
 }
     
@@ -37,8 +31,8 @@ SongRecording& SongRecording::operator = (const SongRecording& songRecord) {
 }
     
 SongRecording::~SongRecording() {
-
-    delete[] this->artistNames;
+    if (artistNames)
+        delete[] this->artistNames;
 
 }
     
@@ -48,38 +42,17 @@ string SongRecording::GetTitle() {
 
 }
     
-int SongRecording::GetNumArtists() {
-
-    return this->artistNumber;
-
-}
-
-void SongRecording::SetNumArtists(int num) {
-
-    if (num > 0)
-        this->artistNumber = num;
-
-}
-    
-void SongRecording::SetTitle(string title) {
-
-    if (title.length() > 0)
-        this->songTitle = title;
-
-}
-    
-void SongRecording::SetArtist(string artist, int num) {
-
-    if ((artist.length() > 0)&&(num > 0) && (num <= this->artistNumber))
-        this->artistNames[num] = artist;
-
-}
-    
 string SongRecording::GetArtist(int num) {
 
     if ((num > 0) && (num <= this->artistNumber))
-        return artistNames[num];
+        return this -> artistNames[num];
     return "out of bounds";
+
+}
+
+int SongRecording::GetNumArtists() {
+
+    return this->artistNumber;
 
 }
 
@@ -89,9 +62,30 @@ int SongRecording::GetTrackLength() {
 
 }
 
+void SongRecording::SetTitle(const string& title) {
+
+    if (title.size() > 0)
+        this->songTitle = title;
+
+}
+
+void SongRecording::SetNumArtists(int num) {
+
+    if (num > 0)
+        this->artistNumber = num;
+    this -> artistNames = new string[this -> artistNumber];
+}
+    
+void SongRecording::SetArtist(const string& artist, int num) {
+
+    if ((artist.size() > 0)&&(num > 0) && (num <= this->artistNumber))
+        this->artistNames[num] = artist;
+
+}
+
 void SongRecording::SetTrackLength(int num) {
 
-    if (num >= 0)
+    if (num > 0)
         this->trackLength = num;
 
 }
